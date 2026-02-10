@@ -1,0 +1,32 @@
+@import url("login.css");
+
+/* wider card for signup */
+.login-container {
+  max-width: 620px;
+}
+
+/* first + last name row */
+.form-row {
+  display: flex;
+  gap: 16px;
+}
+
+.form-group.half {
+  width: 50%;
+}
+
+/* signup icon */
+.logo-circle::after {
+  content: "✨";
+}
+
+/* responsive */
+@media (max-width: 480px) {
+  .form-row {
+    flex-direction: column;
+  }
+
+  .form-group.half {
+    width: 100%;
+  }
+}
