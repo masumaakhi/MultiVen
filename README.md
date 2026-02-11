@@ -1,3 +1,5 @@
+Setup for MySQL Database:
+
 1.  cmd: pip install mysqlclient
 2. mysql shell: CREATE DATABASE my_django_db;
 3. project er setting.py: 
@@ -31,3 +33,22 @@ python -m venv venv
 venv\Scripts\activate
 
 For venv deactivate
+
+
+Setup for PostgreSQL:
+1. pip install psycopg2-binary
+2. settings.py:
+        DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'mydb',                # আপনার তৈরি করা ডাটাবেসের নাম
+        'USER': 'postgres',            # ডিফল্ট ইউজার সাধারণত এটাই থাকে
+        'PASSWORD': 'your_password',   # PostgreSQL ইন্সটলের সময় যে পাসওয়ার্ড দিয়েছিলেন
+        'HOST': '127.0.0.1',           # লোকাল পিসির জন্য 127.0.0.1 বা localhost
+        'PORT': '5432',                # PostgreSQL এর ডিফল্ট পোর্ট
+    }
+}
+
+3. python manage.py makemigrations
+4. python manage.py migrate
+5. python manage.py runserver

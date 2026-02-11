@@ -85,15 +85,12 @@ WSGI_APPLICATION = 'MultiVen.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'multiven_db',
-        'USER': 'multiven_user',
-        'PASSWORD': 'strongpassword',
-        'HOST': 'localhost',
-        'PORT': '3306',
-        'OPTIONS': {
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
-        },
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'mydb',                # আপনার তৈরি করা ডাটাবেসের নাম
+        'USER': 'postgres',            # ডিফল্ট ইউজার সাধারণত এটাই থাকে
+        'PASSWORD': 'PostSQL123',   # PostgreSQL ইন্সটলের সময় যে পাসওয়ার্ড দিয়েছিলেন
+        'HOST': '127.0.0.1',           # লোকাল পিসির জন্য 127.0.0.1 বা localhost
+        'PORT': '5432',                # PostgreSQL এর ডিফল্ট পোর্ট
     }
 }
 
