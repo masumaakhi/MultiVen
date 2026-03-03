@@ -1,62 +1,96 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Dashboard</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-    <style>
-        body{
-            font-family:Poppins;
-            color: #e0e0e0;
-            background: linear-gradient(135deg, #0f2714 0%, #1a3c22 100%);
-        }
-        .card{
-            width:420px;
-            margin:120px auto;
-            text-align:center;
-            background: rgba(20, 37, 26, 0.92);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 40px 32px;
-            box-shadow: 0 20px 60px rgba(29, 29, 29, 0.6);
-            border: 1px solid rgba(46, 125, 50, 0.25);
-        }
-        .btn{
-            display:inline-block;
-            margin:10px;
-            padding:10px 22px;
-            text-decoration:none;
-            border-radius:6px;
-            color:white;
-        }
-        .login{ background:#3498db; }
-        .register{ background:#2ecc71; }
-        .logout{ background:#e74c3c; }
-    </style>
-</head>
-<body>
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
 
-<div class="card">
+{% block content %}
+
+<style>
+.dashboard-wrap{
+    max-width:700px;
+    margin:80px auto;
+}
+
+.dashboard-card{
+    text-align:center;
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(12px);
+    border-radius:18px;
+    padding:40px;
+    border:1px solid rgba(255,255,255,0.12);
+    box-shadow:0 20px 60px rgba(0,0,0,0.35);
+}
+
+.dashboard-card h2{
+    margin-bottom:10px;
+}
+
+.dashboard-card p{
+    opacity:.8;
+}
+
+.dash-btn{
+    display:inline-block;
+    margin:10px;
+    padding:10px 22px;
+    border-radius:8px;
+    text-decoration:none;
+    font-weight:600;
+}
+
+.login-btn{
+    background:#4f8cff;
+    color:white;
+}
+
+.register-btn{
+    background:#2ecc71;
+    color:white;
+}
+
+.logout-btn{
+    background:#e74c3c;
+    color:white;
+}
+
+.vendor-btn{
+    background:#9b59b6;
+    color:white;
+}
+</style>
+
+<div class="dashboard-wrap">
+
+<div class="dashboard-card">
 
 {% if user.is_authenticated %}
 
-    <h2>Welcome back 👋</h2>
-    <p><strong>Username:</strong> {{ user.username }}</p>
-    <p><strong>Email:</strong> {{ user.email }}</p>
+<h2>Welcome back 👋</h2>
 
-    <a href="{% url 'logout' %}" class="btn logout">Logout</a>
+<p><strong>Username:</strong> {{ user.username }}</p>
+<p><strong>Email:</strong> {{ user.email }}</p>
+
+<a href="{% url 'logout' %}" class="dash-btn logout-btn">Logout</a>
+
+<a href="/product/add-product/" class="dash-btn vendor-btn">
+Add Product
+</a>
 
 {% else %}
 
-    <h2>Hello there 👀</h2>
-    <p>Please sign in or create an account to continue</p>
+<h2>Hello there 👀</h2>
+<p>Please sign in or create an account to continue</p>
 
-    <a href="{% url 'login' %}" class="btn login">Sign In</a>
-    <a href="{% url 'register' %}" class="btn register">Sign Up</a>
+<a href="{% url 'login' %}" class="dash-btn login-btn">
+Sign In
+</a>
+
+<a href="{% url 'register' %}" class="dash-btn register-btn">
+Sign Up
+</a>
 
 {% endif %}
 
 </div>
 
-</body>
-</html>
+</div>
+
+{% endblock %}
