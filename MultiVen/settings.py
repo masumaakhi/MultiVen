@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Auth',
-    'home'
+    'home',
+    'vendor'
 ]
 
 MIDDLEWARE = [
@@ -88,7 +89,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'multiven_db',
         'USER': 'multiven_user',
-        'PASSWORD': 'strongpassword',
+        'PASSWORD': 'mySQL@123',
         'HOST': 'localhost',
         'PORT': '3306',
         'OPTIONS': {
