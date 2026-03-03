@@ -26,7 +26,7 @@ urlpatterns = [
     path('auth/', include('Auth.urls')),
     path('', include('home.urls')),
     path('vendor/', include('vendor.urls')),
-   path('product/', include('Product.urls'))
+    path('product/', include('Product.urls'))
 ]
 
 # Development-এর জন্য static + media ফাইল সার্ভ করা (খুবই গুরুত্বপূর্ণ)
