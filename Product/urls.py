@@ -2,7 +2,7 @@
 
 from django.urls import path
 from .views import *
-# from .views import add_product
+from .views import add_product
 urlpatterns = [
-    # path('add-product/', add_product, name="add_product"),
+    path('add-product/', add_product, name="add_product"),
 ]
