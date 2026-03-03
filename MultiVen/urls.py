@@ -25,7 +25,7 @@ urlpatterns = [
     # path('', include('home.urls')),
     path('auth/', include('Auth.urls')),
     path('', include('home.urls')),
-    path('vendor/', include('vendor.urls')),
+    path('vendor/', include('Vendor.urls')),
     path('product/', include('Product.urls'))
 ]
 
