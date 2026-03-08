@@ -1,0 +1,176 @@
+{% extends "base.html" %}
+{% block title %}My Products{% endblock %}
+
+{% block content %}
+
+<style>
+  .mp-wrap{max-width:1100px;margin:28px auto;}
+  .mp-head{display:flex;gap:12px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;margin-bottom:14px;}
+  .mp-title{margin:0;font-size:26px;letter-spacing:-.2px}
+  .mp-sub{margin:6px 0 0;opacity:.75;font-size:13px}
+  .mp-actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+
+  .mp-btn{
+    display:inline-block;
+    padding:10px 14px;
+    border-radius:12px;
+    font-weight:800;
+    text-decoration:none;
+    border:1px solid rgba(255,255,255,.16);
+    background: rgba(255,255,255,.06);
+    color: inherit;
+  }
+  .mp-btn:hover{background: rgba(255,255,255,.10);}
+  .mp-btn.primary{
+    border-color: transparent;
+    background: linear-gradient(135deg, rgba(79,140,255,1), rgba(47,111,255,1));
+    color:#fff;
+  }
+  .mp-btn.danger{
+    border-color: rgba(255,99,99,.35);
+    background: rgba(255,99,99,.10);
+  }
+
+  .mp-card{
+    border:1px solid rgba(255,255,255,.14);
+    background: rgba(255,255,255,.05);
+    border-radius:18px;
+    box-shadow:0 18px 55px rgba(0,0,0,.22);
+    overflow:hidden;
+  }
+
+  .mp-table-wrap{overflow:auto;}
+  table{width:100%;border-collapse:collapse;min-width:820px;}
+  thead th{
+    text-align:left;
+    font-size:12px;
+    letter-spacing:.4px;
+    text-transform:uppercase;
+    opacity:.8;
+    padding:14px 14px;
+    border-bottom:1px solid rgba(255,255,255,.12);
+    background: rgba(0,0,0,.10);
+  }
+  tbody td{
+    padding:14px 14px;
+    border-bottom:1px solid rgba(255,255,255,.08);
+    vertical-align:middle;
+  }
+  tbody tr:hover{background: rgba(255,255,255,.03);}
+
+  .pill{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:6px 10px;
+    border-radius:999px;
+    font-weight:800;
+    font-size:12px;
+    border:1px solid rgba(255,255,255,.14);
+    background: rgba(0,0,0,.12);
+  }
+  .dot{
+    width:10px;height:10px;border-radius:999px;
+    background: rgba(255,255,255,.35);
+    display:inline-block;
+  }
+  .pill.active{border-color: rgba(46,204,113,.35); background: rgba(46,204,113,.10);}
+  .pill.active .dot{background: rgba(46,204,113,1);}
+  .pill.inactive{border-color: rgba(231,76,60,.35); background: rgba(231,76,60,.10);}
+  .pill.inactive .dot{background: rgba(231,76,60,1);}
+
+  .name{font-weight:900;}
+  .muted{opacity:.75;font-size:12px;margin-top:3px;}
+  .price{font-weight:900;}
+  .stock{font-weight:900;}
+  .actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+  .empty{
+    padding:34px;
+    text-align:center;
+    opacity:.8;
+  }
+
+  @media (max-width:720px){
+    .mp-title{font-size:22px}
+  }
+</style>
+
+<div class="mp-wrap">
+
+  <div class="mp-head">
+    <div>
+      <h2 class="mp-title">My Products</h2>
+      <p class="mp-sub">Your products for this vendor account.</p>
+    </div>
+
+    <div class="mp-actions">
+      <a class="mp-btn" href="{% url 'vendor_dashboard' %}">← Vendor Dashboard</a>
+      <a class="mp-btn primary" href="{% url 'add_product' %}">+ Add Product</a>
+    </div>
+  </div>
+
+  <div class="mp-card">
+    <div class="mp-table-wrap">
+
+      {% if products %}
+      <table>
+        <thead>
+          <tr>
+            <th>#ID</th>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Stock</th>
+            <th>Status</th>
+            <th style="text-align:right;">Actions</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {% for p in products %}
+          <tr>
+            <td>#{{ p.id }}</td>
+
+            <td>
+              <div class="name">{{ p.name }}</div>
+              <div class="muted">
+                {{ p.created_at|date:"M d, Y" }}
+              </div>
+            </td>
+
+            <td class="price">৳{{ p.price }}</td>
+
+            <td class="stock">{{ p.stock }}</td>
+
+            <td>
+              {% if p.is_active %}
+                <span class="pill active"><span class="dot"></span> Active</span>
+              {% else %}
+                <span class="pill inactive"><span class="dot"></span> Inactive</span>
+              {% endif %}
+            </td>
+
+            <td style="text-align:right;">
+              <div class="actions">
+                <!-- এগুলো পরে implement করবে -->
+                <a class="mp-btn" href="#">Edit</a>
+                <a class="mp-btn danger" href="#">Delete</a>
+              </div>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% else %}
+        <div class="empty">
+          <h3 style="margin:0 0 8px;">No products yet</h3>
+          <div style="margin-bottom:14px;">Add your first product to start selling.</div>
+          <a class="mp-btn primary" href="{% url 'add_product' %}">+ Add Product</a>
+        </div>
+      {% endif %}
+
+    </div>
+  </div>
+
+</div>
+
+{% endblock %}
