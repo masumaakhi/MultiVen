@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import dj_database_url
 import os
 from datetime import timedelta
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -91,14 +92,15 @@ WSGI_APPLICATION = 'MultiVen.wsgi.application'
 # }
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'mydb',                # আপনার তৈরি করা ডাটাবেসের নাম
-        'USER': 'postgres',            # ডিফল্ট ইউজার সাধারণত এটাই থাকে
-        'PASSWORD': 'PostSQL123',   # PostgreSQL ইন্সটলের সময় যে পাসওয়ার্ড দিয়েছিলেন
-        'HOST': '127.0.0.1',           # লোকাল পিসির জন্য 127.0.0.1 বা localhost
-        'PORT': '5432',                # PostgreSQL এর ডিফল্ট পোর্ট
-    }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'NAME': 'mydb',                # আপনার তৈরি করা ডাটাবেসের নাম
+    #     'USER': 'postgres',            # ডিফল্ট ইউজার সাধারণত এটাই থাকে
+    #     'PASSWORD': 'PostSQL123',   # PostgreSQL ইন্সটলের সময় যে পাসওয়ার্ড দিয়েছিলেন
+    #     'HOST': '127.0.0.1',           # লোকাল পিসির জন্য 127.0.0.1 বা localhost
+    #     'PORT': '5432',                # PostgreSQL এর ডিফল্ট পোর্ট
+    # }
+    "default": dj_database_url.parse(os.environ.get("DATABASE_URL"))
 }
 
 
