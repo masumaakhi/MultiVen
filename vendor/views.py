@@ -1,6 +1,13 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Vendor
+from rest_framework.viewsets import ModelViewSet
+from .serializers import *
+from .models import *
+
+class VendorViewSets(ModelViewSet):
+    queryset= Vendor.objects.all()
+    serializer_class= VendorSerializer
 
 @login_required
 def vendor_dashboard(request):

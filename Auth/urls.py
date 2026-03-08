@@ -1,10 +1,13 @@
-# Auth/urls.py  ← এই ফাইলে অবশ্যই থাকতে হবে
-
 from django.urls import path
-from .views import * 
+from .views import *
+from rest_framework.routers import DefaultRouter
 
-urlpatterns = [          # ← এই নাম ঠিকঠাক "urlpatterns" হতে হবে (ছোট হাতের s দিয়ে শেষ)
-    # path('', views.some_view, name='some-name'),
+router = DefaultRouter()
+router.register('users', UserViewSet, basename='user')
+
+urlpatterns = [
     path('login/', signin, name='login'),
     path('register/', register, name='register'),
-]
+    path('token/', ObtainTokenView.as_view(), name='token'),
+    path('token/refresh/', AccessTokenFromRefreshToken.as_view(), name='refresh'),
+] + router.urls
