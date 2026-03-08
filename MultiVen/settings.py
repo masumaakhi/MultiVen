@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'django_filters',
     'Auth',
     'home',
-    'Vendor',
+    'Vendor.apps.VendorConfig',
     'Product'
 ]
 
